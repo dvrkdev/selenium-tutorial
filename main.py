@@ -49,9 +49,23 @@ print(f'Sahifa sarlavhasi: {driver.title}')
 # element_by_css = driver.find_element(By.CSS_SELECTOR, 'a.meta-author')
 # print(element_by_css.text)
 
-username = WebDriverWait(driver, 10).until(
-	EC.presence_of_element_located((By.ID, 'username')))
-username.send_keys('dvrkdev')
+# username = WebDriverWait(driver, 10).until(
+# 	EC.presence_of_element_located((By.ID, 'username')))
+# username.send_keys('dvrkdev')
+
+# Jadvalni kutib olish
+table = WebDriverWait(driver, 10).until(
+	EC.presence_of_element_located((By.ID, "pagination-table")))
+# Barcha qatorlarni olish
+rows = table.find_elements(By.TAG_NAME, 'tr')  # find_elements -> plural
+# print(rows)
+print(f'Jami qatorlar: {len(rows)}')
+
+# Qator ichidagi ustunga tegishli matnlarni chiqarish
+for i, row in enumerate(rows):
+	cells = row.find_elements(By.TAG_NAME, 'td')
+	cell_texts = [cell.text for cell in cells]
+	print(f'{i}-qator: {cell_texts}')
 
 # 5 soniya kutish
 time.sleep(5)
