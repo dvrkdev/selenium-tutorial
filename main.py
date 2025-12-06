@@ -17,7 +17,7 @@ load_dotenv()
 service = Service(executable_path='chromedriver-linux64/chromedriver')
 
 options = Options()
-options.headless = True
+options.headless = False
 options.add_argument("--disable-extensions")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
@@ -77,29 +77,64 @@ bio = driver.find_element(By.NAME, 'bio')
 bio.send_keys('Python Developer')
 
 # Select elements
-select_element = driver.find_element(By.NAME, 'country')
-select = Select(select_element)
-# select.select_by_index(1)
-# select.select_by_value('ca')
-select.select_by_visible_text('Japan')
+country_element = driver.find_element(By.NAME, 'country')
+country = Select(country_element)
+# country.select_by_index(1)
+# country.select_by_value('ca')
+country.select_by_visible_text('Japan')
 
-for option in select.options:
+for option in country.options:
 	print(f'{option.text}: {option.get_attribute("value")}')
 
 # Multi-select elements
-multi_select_element = driver.find_element(By.NAME, 'languages')
-multi_select = Select(multi_select_element)
-multi_select.select_by_index(0)
-multi_select.select_by_value('es')
-multi_select.select_by_visible_text('French')
+languages_element = driver.find_element(By.NAME, 'languages')
+languages = Select(languages_element)
+languages.select_by_index(0)
+languages.select_by_value('es')
+languages.select_by_visible_text('French')
 
-selected_options = multi_select.all_selected_options
+selected_options = languages.all_selected_options
 for opt in selected_options:
 	print(opt.text)
 
-time.sleep(3)
+# time.sleep(3)
 
-multi_select.deselect_all()
+# languages.deselect_all()
+
+# languages.select_by_index(1)
+
+# Checkboxes and radio buttons
+# interests = driver.find_elements(By.NAME, 'interests')
+
+interest = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.XPATH, "//input[@name='interests' and @value='music']"))
+)
+
+driver.execute_script("arguments[0].scrollIntoView(true);", interest)
+time.sleep(0.2)
+driver.execute_script("arguments[0].click();", interest)
+
+
+# # Check all the boxes
+# for interest in interests:
+# 	if not interest.is_selected():
+# 		interest.click()
+
+# time.sleep(2)
+
+# # Uncheck all boxes
+# for interest in interests:
+# 	if interest.is_selected():
+# 		interest.click()
+
+radios = driver.find_elements(By.NAME, 'gender')
+for r in radios:
+	if r.get_attribute('value') == 'male':
+		r.click()
+
+# Button
+btn = driver.find_element(By.ID, 'submit-btn')
+btn.click()
 
 
 # ==== WORKING WITH TABLES ====
@@ -120,7 +155,7 @@ multi_select.deselect_all()
 
 
 
-# # Wait for 5 seconds
+# Wait for 5 seconds
 time.sleep(5)
 
 # Close the browser
