@@ -137,6 +137,11 @@ print(f'Page title: {driver.title}')
 # btn.click()
 
 
+# Scroll to element
+target_element = driver.find_element(By.ID, "pagination-table")
+driver.execute_script("arguments[0].scrollIntoView(true);", target_element)
+
+
 # ==== WORKING WITH TABLES ====
 
 # # Wait for the table
