@@ -64,38 +64,38 @@ print(f'Page title: {driver.title}')
 
 # ==== PERFORMING ACTIONS ====
 
-username = driver.find_element(By.NAME, 'username')
-username.send_keys('dvrkdev')  # input text
+# username = driver.find_element(By.NAME, 'username')
+# username.send_keys('dvrkdev')  # input text
 
-email = driver.find_element(By.NAME, 'email')
-email.send_keys('diyorbek.qodirboyev05@gmail.com')
+# email = driver.find_element(By.NAME, 'email')
+# email.send_keys('diyorbek.qodirboyev05@gmail.com')
 
-password = driver.find_element(By.NAME, 'password')
-password.send_keys(os.environ.get('MY_PASSWORD'))
+# password = driver.find_element(By.NAME, 'password')
+# password.send_keys(os.environ.get('MY_PASSWORD'))
 
-bio = driver.find_element(By.NAME, 'bio')
-bio.send_keys('Python Developer')
+# bio = driver.find_element(By.NAME, 'bio')
+# bio.send_keys('Python Developer')
 
-# Select elements
-country_element = driver.find_element(By.NAME, 'country')
-country = Select(country_element)
-# country.select_by_index(1)
-# country.select_by_value('ca')
-country.select_by_visible_text('Japan')
+# # Select elements
+# country_element = driver.find_element(By.NAME, 'country')
+# country = Select(country_element)
+# # country.select_by_index(1)
+# # country.select_by_value('ca')
+# country.select_by_visible_text('Japan')
 
-for option in country.options:
-	print(f'{option.text}: {option.get_attribute("value")}')
+# for option in country.options:
+# 	print(f'{option.text}: {option.get_attribute("value")}')
 
-# Multi-select elements
-languages_element = driver.find_element(By.NAME, 'languages')
-languages = Select(languages_element)
-languages.select_by_index(0)
-languages.select_by_value('es')
-languages.select_by_visible_text('French')
+# # Multi-select elements
+# languages_element = driver.find_element(By.NAME, 'languages')
+# languages = Select(languages_element)
+# languages.select_by_index(0)
+# languages.select_by_value('es')
+# languages.select_by_visible_text('French')
 
-selected_options = languages.all_selected_options
-for opt in selected_options:
-	print(opt.text)
+# selected_options = languages.all_selected_options
+# for opt in selected_options:
+# 	print(opt.text)
 
 # time.sleep(3)
 
@@ -106,13 +106,13 @@ for opt in selected_options:
 # Checkboxes and radio buttons
 # interests = driver.find_elements(By.NAME, 'interests')
 
-interest = WebDriverWait(driver, 10).until(
-    EC.presence_of_element_located((By.XPATH, "//input[@name='interests' and @value='music']"))
-)
+# interest = WebDriverWait(driver, 10).until(
+#     EC.presence_of_element_located((By.XPATH, "//input[@name='interests' and @value='music']"))
+# )
 
-driver.execute_script("arguments[0].scrollIntoView(true);", interest)
-time.sleep(0.2)
-driver.execute_script("arguments[0].click();", interest)
+# driver.execute_script("arguments[0].scrollIntoView(true);", interest)
+# time.sleep(0.2)
+# driver.execute_script("arguments[0].click();", interest)
 
 
 # # Check all the boxes
@@ -127,14 +127,14 @@ driver.execute_script("arguments[0].click();", interest)
 # 	if interest.is_selected():
 # 		interest.click()
 
-radios = driver.find_elements(By.NAME, 'gender')
-for r in radios:
-	if r.get_attribute('value') == 'male':
-		r.click()
+# radios = driver.find_elements(By.NAME, 'gender')
+# for r in radios:
+# 	if r.get_attribute('value') == 'male':
+# 		r.click()
 
-# Button
-btn = driver.find_element(By.ID, 'submit-btn')
-btn.click()
+# # Button
+# btn = driver.find_element(By.ID, 'submit-btn')
+# btn.click()
 
 
 # ==== WORKING WITH TABLES ====
